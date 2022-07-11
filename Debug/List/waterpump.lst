@@ -1,0 +1,94 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.22.1.15669/W32 for ARM       30/Nov/2021  19:36:36
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\pnu5\Downloads\project_test\Libraries\Term\waterpump.c
+#    Command line =  
+#        -f C:\Users\pnu5\AppData\Local\Temp\EW98FD.tmp
+#        (C:\Users\pnu5\Downloads\project_test\Libraries\Term\waterpump.c -D
+#        USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC
+#        C:\Users\pnu5\Downloads\project_test\Debug\List -o
+#        C:\Users\pnu5\Downloads\project_test\Debug\Obj --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling
+#        --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\CMSIS\DeviceSupport\ -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\CMSIS\DeviceSupport\Startup\
+#        -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\
+#        -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\STM32F10x_StdPeriph_Driver_v3.5\src\
+#        -I C:\Users\pnu5\Downloads\project_test\user\ -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\LCD\ -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\Term\ -I
+#        C:\Users\pnu5\Downloads\project_test\user\inc\ -Ol -I "C:\Program
+#        Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\arm\CMSIS\Core\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 8.0\arm\CMSIS\DSP\Include\")
+#    Locale       =  C
+#    List file    =  
+#        C:\Users\pnu5\Downloads\project_test\Debug\List\waterpump.lst
+#    Object file  =  C:\Users\pnu5\Downloads\project_test\Debug\Obj\waterpump.o
+#
+###############################################################################
+
+C:\Users\pnu5\Downloads\project_test\Libraries\Term\waterpump.c
+      1          #include "stm32f10x.h"
+      2          
+
+   \                                 In section .text, align 4, keep-with-next
+      3          void waterpump_init() {
+   \                     waterpump_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+      4            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE); 
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x2040             MOVS     R0,#+64
+   \   00000006   0x.... 0x....      BL       RCC_APB2PeriphClockCmd
+      5            
+      6            GPIO_InitTypeDef GPIO_InitStructure;  
+      7            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+   \   0000000A   0x2002             MOVS     R0,#+2
+   \   0000000C   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+      8            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   \   00000010   0x2003             MOVS     R0,#+3
+   \   00000012   0xF88D 0x0002      STRB     R0,[SP, #+2]
+      9            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \   00000016   0x2010             MOVS     R0,#+16
+   \   00000018   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     10            GPIO_Init(GPIOE, &GPIO_InitStructure);  
+   \   0000001C   0x4669             MOV      R1,SP
+   \   0000001E   0x4802             LDR.N    R0,??waterpump_init_0  ;; 0x40011800
+   \   00000020   0x.... 0x....      BL       GPIO_Init
+     11          }
+   \   00000024   0xBD01             POP      {R0,PC}          ;; return
+   \   00000026   0xBF00             Nop      
+   \                     ??waterpump_init_0:
+   \   00000028   0x40011800         DC32     0x40011800
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   waterpump_init
+         8   -> GPIO_Init
+         8   -> RCC_APB2PeriphClockCmd
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      44  waterpump_init
+
+ 
+ 44 bytes in section .text
+ 
+ 44 bytes of CODE memory
+
+Errors: none
+Warnings: none

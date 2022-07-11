@@ -1,0 +1,104 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.22.1.15669/W32 for ARM       30/Nov/2021  19:45:50
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\pnu5\Downloads\project_test\Libraries\Term\usart.c
+#    Command line =  
+#        -f C:\Users\pnu5\AppData\Local\Temp\EWB52.tmp
+#        (C:\Users\pnu5\Downloads\project_test\Libraries\Term\usart.c -D
+#        USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC
+#        C:\Users\pnu5\Downloads\project_test\Debug\List -o
+#        C:\Users\pnu5\Downloads\project_test\Debug\Obj --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling
+#        --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\CMSIS\DeviceSupport\ -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\CMSIS\DeviceSupport\Startup\
+#        -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\
+#        -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\STM32F10x_StdPeriph_Driver_v3.5\src\
+#        -I C:\Users\pnu5\Downloads\project_test\user\ -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\LCD\ -I
+#        C:\Users\pnu5\Downloads\project_test\libraries\Term\ -I
+#        C:\Users\pnu5\Downloads\project_test\user\inc\ -Ol -I "C:\Program
+#        Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\arm\CMSIS\Core\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 8.0\arm\CMSIS\DSP\Include\")
+#    Locale       =  C
+#    List file    =  C:\Users\pnu5\Downloads\project_test\Debug\List\usart.lst
+#    Object file  =  C:\Users\pnu5\Downloads\project_test\Debug\Obj\usart.o
+#
+###############################################################################
+
+C:\Users\pnu5\Downloads\project_test\Libraries\Term\usart.c
+      1          #include "stm32f10x.h"
+      2          #incldue "stm32f10x_usart.h"
+                  ^
+Error[Pe011]: unrecognized preprocessing directive
+      3          #include "stm32f10x_rcc.h"
+      4          
+      5          
+      6          
+      7          void usart_init(void)
+      8          {
+      9            RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+     10            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+     11            
+     12             USART_InitTypeDef USART2_InitStructure;
+     13             
+     14             /* UART2 pin setting */
+     15             GPIO_InitTypeDef GPIO_InitStructure;
+     16            //TX
+     17            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+     18            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     19            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+     20            GPIO_Init(GPIOA, &GPIO_InitStructure);
+     21            
+     22            //RX
+     23            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+     24            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     25            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+     26            GPIO_Init(GPIOA, &GPIO_InitStructure);
+     27             
+     28          
+     29             // Initialize the USART2 using the structure 'USART_InitTypeDef' and the function 'USART_Init'
+     30             USART2_InitStructure.USART_BaudRate = 9600;
+     31             USART2_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+     32             USART2_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+     33             USART2_InitStructure.USART_Parity = USART_Parity_No;
+     34             USART2_InitStructure.USART_StopBits = USART_StopBits_1;
+     35             USART2_InitStructure.USART_WordLength = USART_WordLength_8b;
+     36             USART_Init(USART2, &USART2_InitStructure);
+     37          
+     38             // Enable the USART2 peripheral
+     39             USART_Cmd(USART2, ENABLE);
+     40             // Enable the USART2 RX interrupts using the function 'USART_ITConfig' and the argument value 'Receive Data register not empty interrupt'
+     41             USART_ITConfig(USART2, USART_IT_RXNE, ENABLE); // USART RX@?Interrupt ?@@
+     42             
+     43             NVIC_InitTypeDef NVIC_InitStructure;
+     44            
+     45            
+     46            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+     47              
+     48            // UART2
+     49            // 'NVIC_EnableIRQ' is only required for USART setting
+     50            NVIC_EnableIRQ(USART2_IRQn);
+     51            NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
+     52            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // TODO
+     53            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; // TODO
+     54            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+     55            NVIC_Init(&NVIC_InitStructure);
+     56             
+     57          }
+     58          
+     59          
+     60          
+
+Errors: 1
+Warnings: none
